@@ -1,0 +1,33 @@
+{
+  "class": "dev.drawethree.xprison.enchant.ClusterBombEnchant",
+  "id": 101,
+  "rawName": "clusterbomb",
+  "name": "&cCluster Bomb",
+  "enabled": true,
+  "increaseCostBy": 150,
+  "maxLevel": 100,
+  "currency": "GEMS",
+  "initialCost": 250,
+  "chance": 0.03,
+  "radius": 3,
+  "pickaxeLevelRequired": 1,
+  "refund": {
+    "enabled": true,
+    "guiSlot": 52,
+    "percentage": 50.0
+  },
+  "gui": {
+    "name": "&cCluster Bomb",
+    "material": "TNT_MINECART",
+    "customModelData": 0,
+    "slot": 52,
+    "description": [
+      "&7&o(( Occasionally drops a timed bomb that",
+      "&7&oexplodes in a sphere 2s after impact ))",
+      "",
+      "&fScales with level:",
+      "&f➤ &7Level 1: 0.3%",
+      "&f➤ &7Level 100: 30% max chance"
+    ]
+  }
+}
