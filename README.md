@@ -3,7 +3,7 @@ Adds support to use 'vault' currency as X-Prison Currency - Directly hooked into
 
 **Links:**
 - [Discord (Support)](https://discord.gg/ZeSkmEC6mG)
-- 
+
 ## How to use ?
 Download latest release jar file and put it into **/plugins/X-Prison/addons** folder
 X-Prison will automatically load this addon and you are good to go!
