@@ -25,7 +25,7 @@ public final class VaultCurrencyHandler implements XPrisonCurrencyHandler {
         if (balance > 0) {
             return economy.withdrawPlayer(offlinePlayer, balance).transactionSuccess();
         }
-        return true;
+        return addBalance(offlinePlayer,v,null);
     }
 
     @Override
