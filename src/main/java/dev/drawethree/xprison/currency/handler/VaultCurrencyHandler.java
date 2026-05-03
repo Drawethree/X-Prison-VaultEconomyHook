@@ -20,12 +20,16 @@ public final class VaultCurrencyHandler implements XPrisonCurrencyHandler {
     }
 
     @Override
-    public boolean setBalance(OfflinePlayer offlinePlayer, double v) {
-        double balance = economy.getBalance(offlinePlayer);
-        if (balance > 0) {
-            return economy.withdrawPlayer(offlinePlayer, balance).transactionSuccess();
+    public boolean setBalance(OfflinePlayer offlinePlayer, double amount) {
+        double current = economy.getBalance(offlinePlayer);
+
+        if (current > 0) {
+            if (!economy.withdrawPlayer(offlinePlayer, current).transactionSuccess()) {
+                return false;
+            }
         }
-        return addBalance(offlinePlayer,v,null);
+
+        return economy.depositPlayer(offlinePlayer, amount).transactionSuccess();
     }
 
     @Override
