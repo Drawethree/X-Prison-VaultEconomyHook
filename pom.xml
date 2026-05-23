@@ -6,10 +6,10 @@
 
     <groupId>dev.drawethree.xprison</groupId>
     <artifactId>XPrisonVaultEconomyHook</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.3</version>
     <packaging>jar</packaging>
 
-    <name>ClusterBombEnchant</name>
+    <name>XPrisonVaultEconomyHook</name>
 
     <properties>
         <java.version>17</java.version>
@@ -42,6 +42,7 @@
                             <X-Prison-Addon-Description>${description}</X-Prison-Addon-Description>
                             <X-Prison-Addon-Version>${version}</X-Prison-Addon-Version>
                             <X-Prison-Addon-Author>${author}</X-Prison-Addon-Author>
+                            <X-Prison-Min-Version>2026.2.2.2</X-Prison-Min-Version>
                         </manifestEntries>
                     </archive>
                 </configuration>
@@ -80,7 +81,7 @@
         <dependency>
             <groupId>dev.drawethree.xprison</groupId>
             <artifactId>X-PrisonAPI</artifactId>
-            <version>1.2-SNAPSHOT</version>
+            <version>1.6-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

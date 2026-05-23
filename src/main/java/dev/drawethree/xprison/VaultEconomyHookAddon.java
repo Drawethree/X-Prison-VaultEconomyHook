@@ -2,49 +2,43 @@ package dev.drawethree.xprison;
 
 import dev.drawethree.xprison.api.XPrisonAPI;
 import dev.drawethree.xprison.api.addons.XPrisonAddon;
+import dev.drawethree.xprison.api.addons.XPrisonAddonContext;
 import dev.drawethree.xprison.currency.VaultCurrency;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
-import org.bukkit.event.Listener;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
-import static org.bukkit.Bukkit.getServer;
+import java.util.logging.Logger;
 
-public final class VaultEconomyHookAddon implements XPrisonAddon, Listener {
+public final class VaultEconomyHookAddon implements XPrisonAddon {
 
-    private static VaultEconomyHookAddon instance;
     private XPrisonAPI api;
+    private Logger logger;
     private Economy economy;
     private VaultCurrency vaultCurrencyHook;
 
     @Override
-    public void onEnable() {
-        instance = this;
-        api = XPrisonAPI.getInstance();
+    public void onEnable(XPrisonAddonContext context) {
+        this.api = context.getAPI();
+        this.logger = context.getLogger();
 
-
-        if(setupEconomy()) {
-            vaultCurrencyHook = new VaultCurrency(economy);
-            api.getCurrencyApi().registerCurrency(vaultCurrencyHook);
-        } else {
-            Bukkit.getLogger().warning("Vault plugin not found or missing Economy provider! Vault currency will not be supported.");
-            onDisable();
+        if (!setupEconomy()) {
+            logger.warning("Vault plugin not found or missing Economy provider! Vault currency will not be supported.");
             return;
         }
+
+        vaultCurrencyHook = new VaultCurrency(economy);
+        api.getCurrencyApi().registerCurrency(vaultCurrencyHook);
     }
 
     private boolean setupEconomy() {
-
-        if (getServer().getPluginManager().getPlugin("Vault") == null) {
+        if (Bukkit.getServer().getPluginManager().getPlugin("Vault") == null) {
             return false;
         }
-
-        RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
-
+        RegisteredServiceProvider<Economy> rsp = Bukkit.getServer().getServicesManager().getRegistration(Economy.class);
         if (rsp == null) {
             return false;
         }
-
         economy = rsp.getProvider();
         return economy != null;
     }
@@ -54,9 +48,5 @@ public final class VaultEconomyHookAddon implements XPrisonAddon, Listener {
         if (vaultCurrencyHook != null) {
             api.getCurrencyApi().unregisterCurrency(vaultCurrencyHook);
         }
-    }
-
-    public XPrisonAPI getApi() {
-        return api;
     }
 }
