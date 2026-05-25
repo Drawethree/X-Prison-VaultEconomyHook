@@ -36,7 +36,31 @@ public final class VaultCurrency implements XPrisonCurrency {
 
     @Override
     public String getSuffix() {
-        return null;
+        return economy.currencyNameSingular();
+    }
+
+    @Override
+    public double getStartingAmount() {
+        return 0.0;
+    }
+
+    @Override
+    public String getFormatPattern() {
+        int digits = economy.fractionalDigits();
+        if (digits <= 0) {
+            return "#";
+        }
+        return "#." + "#".repeat(digits);
+    }
+
+    @Override
+    public boolean isShortFormat() {
+        return false;
+    }
+
+    @Override
+    public boolean isTrimZeros() {
+        return false;
     }
 
     @Override
